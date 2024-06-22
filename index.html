@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="contactForm">
+        <input type="text" id="name" name="username" placeholder="username">
+        <input type="email" id="email" name="email" placeholder="email">
+        <button id="submit" type="submit">submit</button>
+    </form>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+            let nameI = document.getElementById("name");
+            let contactForm = document.getElementById("contactForm");
+        let emailI = document.getElementById("email");
+        let sub = document.getElementById("submit");
+        let publickKey = "XtpF161KSYKnHy_vT";
+        let service_id =  "service_au7mtnr";
+        let template_id =  "template_5p3eyir";
+        emailjs.init(publickKey);
+        contactForm.addEventListener('submit',e=>{
+            e.preventDefault()
+            sub.innerText=".......Just A Moment"
+
+            const inputFields={
+                name:nameI.value,
+                email:emailI.value
+            }
+            emailjs.send(service_id,template_id,inputFields)
+            .then(()=>{
+                sub.innerText="sucsss";
+                nameI.value="";
+                emailI.value="";
+            },(error)=>{
+                console.log(error);
+                sub.innerText="somethinWron"
+            })
+        })
+
+</script>
+</body>
+</html>
